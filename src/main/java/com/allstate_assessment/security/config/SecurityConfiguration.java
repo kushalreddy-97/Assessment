@@ -14,7 +14,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
-
+// creating the users in the inmemory database
     @Bean
     public InMemoryUserDetailsManager userDetailsManager() {
         UserDetails admin = User.withDefaultPasswordEncoder()
@@ -31,6 +31,7 @@ public class SecurityConfiguration {
     }
 
     // Configuring the apis according the roles assigned
+    // allowing the user to access based on the role
     @Bean
     public SecurityFilterChain configureApis(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
