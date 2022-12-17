@@ -28,7 +28,6 @@ public class PersonServiceImpl implements PersonService {
         Person savedPerson = null;
         try {
 
-            Person existingPerson = personRepository.findByLastName(person.getLastName());
             if (checkDuplicateLastName(person.getLastName()))
                 savedPerson = personRepository.save(person);
             else
@@ -41,7 +40,11 @@ public class PersonServiceImpl implements PersonService {
     }
 
     /**
-     * **/
+     * @param personId is used as the parameter to the update method
+     * @Person object that needs to be updated
+     * if there is no record for the id, throwing the exception
+     * duplicate check is handled for the last name
+     **/
     @Override
     public Person updatePerson(long personId, Person person) {
         Person updatedPerson;
@@ -50,7 +53,7 @@ public class PersonServiceImpl implements PersonService {
             {
                 throw new PersonNotFoundException("Person Not Found", HttpStatus.NOT_FOUND);
             });
-            if (checkDuplicateLastName(person.getLastName()) && (person.getPersonId()!= updatedPerson.getPersonId())) {
+            if (checkDuplicateLastName(person.getLastName())&& (person.getPersonId()!= updatedPerson.getPersonId())) {
                 throw new PersonExistsException("person with last name already exists", HttpStatus.CONFLICT);
             }
 
@@ -115,7 +118,7 @@ public class PersonServiceImpl implements PersonService {
 
     private boolean checkDuplicateLastName(String lastName) {
         Person existingPerson = personRepository.findByLastName(lastName);
-        if (existingPerson == null)
+        if (existingPerson== null)
             return true;
         else
             return false;
