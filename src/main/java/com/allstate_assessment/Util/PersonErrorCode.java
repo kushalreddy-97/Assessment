@@ -17,10 +17,10 @@ public enum PersonErrorCode implements IErrorCode {
     PERSON_MOBILE_NUMBER_INVALID(2007,"person.mobileNumber Invalid"),
     PERSON_FIRST_NAME_INVALID(2008,"person.firstName Invalid"),
     DEFAULT(2000, "unknown error");
-    private int code;
-    private String message;
+    private final int code;
+    private final String message;
 
-    private PersonErrorCode(int code, String message) {
+    PersonErrorCode(int code, String message) {
         this.code = code;
         this.message = message;
     }

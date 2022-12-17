@@ -14,27 +14,27 @@ public class CommonValidatorUtil {
     private static final Pattern IS_NAME_PATTERN = Pattern.compile("^[a-zA-Z0-9 ]*$");
 
     public static boolean isAlphanumeric(String stringAndNumber) {
-        boolean result = true;
+        boolean result;
         result = ALPHANUMARIC_PATTERN.matcher(String.valueOf(stringAndNumber)).matches();
         return result;
 
     }
 
     public static boolean isAlphabetical(String string) {
-        boolean result = true;
+        boolean result;
         result = ALPHABETICAL_PATTERN.matcher(String.valueOf(string)).matches();
         return result;
     }
 
     public static boolean isNumeric(String number) {
-        boolean result = true;
+        boolean result;
         result = NUMERIC_INTEGER_PATTERN.matcher(String.valueOf(number)).matches();
         return result;
 
     }
 
     public static boolean isPhoneNumber(String phoneNumber) {
-        boolean result = false;
+        boolean result;
         result = NUMERIC_INTEGER_PATTERN.matcher(String.valueOf(phoneNumber)).matches();
         if (result && (phoneNumber.length() < 10 || phoneNumber.length() > 11)) {
             result = false;
@@ -43,10 +43,10 @@ public class CommonValidatorUtil {
     }
 
     public static boolean isName(String name) {
-        boolean result = true;
+        boolean result;
         result = IS_NAME_PATTERN.matcher(String.valueOf(name)).matches();
         if (!result) {
-            return result;
+            return false;
         } else {
             result = ("" + name.charAt(0)).matches("^[a-zA-Z]");
             return result;

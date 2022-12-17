@@ -2,9 +2,11 @@ package com.allstate_assessment.Exception;
 
 import org.springframework.validation.FieldError;
 
+import java.io.Serial;
 import java.util.List;
 
 public class InputFieldValidationException extends RuntimeException {
+    @Serial
     private static final long serialVersionUID = 3940740629410252651L;
     final transient List<FieldError> fieldErrorList;
 

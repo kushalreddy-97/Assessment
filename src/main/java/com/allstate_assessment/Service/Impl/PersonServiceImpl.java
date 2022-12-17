@@ -19,9 +19,10 @@ public class PersonServiceImpl implements PersonService {
     @Autowired
     PersonRepository personRepository;
 
-
-    // Adding the person to the database
-    // if the person last name already exists then raise
+    /**
+     * Adding the person to the database
+     * if the person last name already exists then raise the error
+     **/
     @Override
     public Person addPerson(Person person) {
         Person savedPerson = null;
@@ -39,6 +40,8 @@ public class PersonServiceImpl implements PersonService {
         return savedPerson;
     }
 
+    /**
+     * **/
     @Override
     public Person updatePerson(long personId, Person person) {
         Person updatedPerson;
@@ -47,7 +50,7 @@ public class PersonServiceImpl implements PersonService {
             {
                 throw new PersonNotFoundException("Person Not Found", HttpStatus.NOT_FOUND);
             });
-            if (!checkDuplicateLastName(person.getLastName())) {
+            if (checkDuplicateLastName(person.getLastName()) && (person.getPersonId()!= updatedPerson.getPersonId())) {
                 throw new PersonExistsException("person with last name already exists", HttpStatus.CONFLICT);
             }
 
